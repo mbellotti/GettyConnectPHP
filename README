@@ -1,0 +1,9 @@
+=== PHP Library for Getty Connect's API ===
+Accessing images from Getty through Getty Connect is (at least) a four step process:
+
+1 - Create a session
+2 - Search for images
+3 - Request Download
+4 - Retrieve Large File
+
+This library was built during a hackathon and is therefore not all that robust or elegant :) But it is functional and requires no specific php frameworks!
