@@ -27,7 +27,7 @@ $createSessionArray = array(
 $json = json_encode($createSessionArray);
 
 	//Get data
-	 $data = curl_me($endpoint, $json, true);
+	 $data = curl_me($endpoint, $json);
 	 $success = $data->ResponseHeader->Status;
 	if($success == "success"){
 		$token[] = $data->CreateSessionResult->Token;
