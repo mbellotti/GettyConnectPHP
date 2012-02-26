@@ -1,9 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
  
 function create_session(){
-/**
- * Requires Zend library
- */
  
 // set params
 $endpoint = "https://connect.gettyimages.com/v1/session/CreateSession";
@@ -83,8 +80,10 @@ function search($searchPhrase, $token){
 		return $data->SearchForImagesResult->Images;
 		
 	}else if($success == "error" && $data->ResponseHeader->StatusList[0]->Code == 'AUTH-012'){
+		//AUTH-012 means our tokens have expired
 		return false;
 	}else{
+		//Otherwise this will contend the era
 		return $data->ResponseHeader;
 	}
 }
@@ -138,7 +137,7 @@ function search($searchPhrase, $token){
 	/*////////////////////////////////////////////////////////////////////////////*/
 	
 	function get_download($sectoken, $dtoken){
-		// image ID for an angelina jolie image we know exists in the system
+		// image ID for an image we know exists in the system
 		$imageDownloadArray = array(array("DownloadToken" => $dtoken));
 
 		// build request to get largest available download of this image
@@ -157,7 +156,6 @@ function search($searchPhrase, $token){
 		// encode
 		$json = json_encode($imageAuthorizationArray);
 		
-		//print_r($json);
 		$data = curl_me($endpoint, $json, true);
 		$success = $data->ResponseHeader->Status;
 		if($success == "success"){
